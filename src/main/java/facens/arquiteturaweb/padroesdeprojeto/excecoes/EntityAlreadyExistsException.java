@@ -1,4 +1,4 @@
-package facens.arquiteturaweb.padroesdeprojeto;
+package facens.arquiteturaweb.padroesdeprojeto.excecoes;
 
 public class EntityAlreadyExistsException extends RuntimeException {
     public EntityAlreadyExistsException(String entity, String field, String value) {

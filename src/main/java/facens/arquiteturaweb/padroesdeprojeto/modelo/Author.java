@@ -1,4 +1,4 @@
-package facens.arquiteturaweb.padroesdeprojeto;
+package facens.arquiteturaweb.padroesdeprojeto.modelo;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;

@@ -1,22 +1,37 @@
 package facens.arquiteturaweb.padroesdeprojeto;
 
+import facens.arquiteturaweb.padroesdeprojeto.excecoes.EntityAlreadyExistsException;
+import facens.arquiteturaweb.padroesdeprojeto.excecoes.EntityNotFoundException;
+import facens.arquiteturaweb.padroesdeprojeto.modelo.Author;
+import facens.arquiteturaweb.padroesdeprojeto.modelo.Book;
+import facens.arquiteturaweb.padroesdeprojeto.modelo.Review;
+import facens.arquiteturaweb.padroesdeprojeto.repositorio.BookRepository;
+import facens.arquiteturaweb.padroesdeprojeto.repositorio.ReviewRepository;
+import facens.arquiteturaweb.padroesdeprojeto.servico.AuthorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @SpringBootApplication
+// Isso deve sair ao final
 @RestController
+// Isso deve sair ao final
 @RequestMapping("/api")
-@Validated
 public class PadroesDeProjetoApplication {
 
-	@Autowired
-	private AuthorRepository authorRepository;
+	/*
+	Quando você usa @Autowired em um campo, construtor ou método de configuração em uma classe gerenciada pelo Spring,
+	o contêiner Spring procura automaticamente por um bean (instância de uma classe gerenciada pelo Spring) correspondente
+	e o injeta no ponto especificado.
+
+	Em outras palavras é uma outra forma de Injeção sem precisar do atributo final e do construtor
+	 */
+
 
 	@Autowired
 	private BookRepository bookRepository;
@@ -26,33 +41,6 @@ public class PadroesDeProjetoApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(PadroesDeProjetoApplication.class, args);
-	}
-
-	// Endpoints para Author
-	@PostMapping("/authors")
-	public ResponseEntity<Author> addAuthor(@RequestBody Author author) {
-		if (author.getId() != null) {
-			throw new EntityAlreadyExistsException("Author", "id", author.getId().toString());
-		}
-		return ResponseEntity.ok(authorRepository.save(author));
-	}
-
-	@GetMapping("/authors")
-	public ResponseEntity<List<Author>> getAllAuthors() {
-		return ResponseEntity.ok(authorRepository.findAll());
-	}
-
-	@DeleteMapping("/authors/{id}")
-	public ResponseEntity<Void> deleteAuthor(@PathVariable Long id) {
-		Author existingAuthor = authorRepository.findById(id)
-				.orElseThrow(() -> new EntityNotFoundException("Author", id));
-
-		if (!existingAuthor.getBooks().isEmpty()) {
-			throw new IllegalStateException("Cannot delete author with associated books");
-		}
-
-		authorRepository.deleteById(id);
-		return ResponseEntity.noContent().build();
 	}
 
 	// Endpoints para Book

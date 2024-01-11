@@ -1,8 +1,7 @@
-package facens.arquiteturaweb.padroesdeprojeto;
+package facens.arquiteturaweb.padroesdeprojeto.repositorio;
 
+import facens.arquiteturaweb.padroesdeprojeto.modelo.Review;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
 
-@Repository
 public interface ReviewRepository extends JpaRepository<Review, Long> {
 }

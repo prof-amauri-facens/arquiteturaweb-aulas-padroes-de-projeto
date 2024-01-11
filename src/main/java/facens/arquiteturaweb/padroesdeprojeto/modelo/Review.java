@@ -1,4 +1,4 @@
-package facens.arquiteturaweb.padroesdeprojeto;
+package facens.arquiteturaweb.padroesdeprojeto.modelo;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -18,7 +18,7 @@ public class Review {
     private Long id;
 
     //@NotBlank(message = "O comentário da avaliação é obrigatório")
-   // @Size(max = 255, message = "O comentário não pode ter mais de 255 caracteres")
+    // @Size(max = 255, message = "O comentário não pode ter mais de 255 caracteres")
     private String comment;
 
     @ManyToOne
