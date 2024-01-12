@@ -1,6 +1,7 @@
 package facens.arquiteturaweb.padroesdeprojeto;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -20,6 +21,7 @@ public class Book {
 
     @ManyToOne
     @JoinColumn(name = "author_id", nullable = false)
+    @JsonIgnore // para que seja ignorado do retorno json nas respostas, para que a API externa possa utilizar mais facilmente
     private Author author;
 
     public Long getId() {
